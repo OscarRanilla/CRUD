@@ -18,37 +18,6 @@ let usuarios = [
     { id: 5, nombre: 'Blanka', edad: 32, lugarProcedencia: 'Brasil' },
 ];
 
-// RUTA PRINCIPAL
-
-app.get('/', (req, res) => {
-    res.send(`
-        <html>
-            <head>
-                <title>Street Fighter API</title>
-                <style>
-                    body { font-family: Arial, sans-serif; margin: 20px; }
-                    h1 { color: #333; }
-                    ul { list-style-type: none; padding: 0; }
-                    li { margin: 10px 0; }
-                    a { text-decoration: none; color: #007BFF; }
-                    a:hover { text-decoration: underline; }
-                </style>
-            </head>
-            <body>
-                <h1>Bienvenido a la API de Street Fighter</h1>
-                <p>Usa los siguientes enlaces para interactuar con la API:</p>
-                <ul>
-                    <li><a href="/usuarios" target="_blank">GET /usuarios</a> - Ver todos los usuarios</li>
-                    <li><a href="#" onclick="alert('Usa Postman o un cliente HTTP para enviar datos'); return false;">POST /usuarios</a> - Crear un nuevo usuario</li>
-                    <li><a href="#" onclick="alert('Usa Postman o un cliente HTTP para enviar datos'); return false;">PUT /usuarios/:nombre</a> - Actualizar un usuario</li>
-                    <li><a href="#" onclick="alert('Usa Postman o un cliente HTTP para enviar datos'); return false;">DELETE /usuarios/:nombre</a> - Eliminar un usuario</li>
-                </ul>
-                <p>Para operaciones POST, PUT y DELETE, utiliza herramientas como Postman o Thunder Client.</p>
-            </body>
-        </html>
-    `);
-});
-
 //Creamos Endpoints CRUD (Create, Read, Update, Delete)
 // Se agrega esta ruta para devolver la lista completa de usuarios
 
@@ -67,7 +36,7 @@ app.post('/usuarios', (req, res) => {
     }
     const nuevoUsuario = { id, nombre, edad, lugarProcedencia};
     usuarios.push(nuevoUsuario); //usamos el push para agregar el nuevo usuario
-    res.status(201),json(nuevoUsuario)
+    res.status(201).json(nuevoUsuario)
 });
 
 // Luego creamos el GET/usuarios/:nombre para obtener el usuario por nombre
@@ -120,3 +89,4 @@ app.delete('/usuarios/:nombre', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Listening server on http://localhost:${PORT}`);
 });
+
