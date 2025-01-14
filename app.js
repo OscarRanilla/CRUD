@@ -30,13 +30,15 @@ app.get('/usuarios', (req, res) => {
 //en el cuerpo de la solicitud
 
 app.post('/usuarios', (req, res) => {
-    const {id, nombre, edad, lugarProcedencia } = req.body;
-    if (!id || !nombre || !edad || !lugarProcedencia) {
-        return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+    const nuevoUsuario = {
+        id : usuarios.length + 1,
+        nombre : req.body.nombre,
+        edad : req.body.edad,
+        lugarProcedencia : req.body.lugarProcedencia
     }
-    const nuevoUsuario = { id, nombre, edad, lugarProcedencia};
     usuarios.push(nuevoUsuario); //usamos el push para agregar el nuevo usuario
     res.status(201).json(nuevoUsuario)
+    // podemos usar tambien:  //!"res.redirect('/usuarios')"
 });
 
 // Luego creamos el GET/usuarios/:nombre para obtener el usuario por nombre
